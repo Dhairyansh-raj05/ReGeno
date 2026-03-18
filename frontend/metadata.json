@@ -1,0 +1,9 @@
+
+{
+  "name": "ReGeno India Marketplace",
+  "description": "The premier destination for battle-tested gaming hardware in India. A specialized marketplace for refurbished consoles and retro gaming gear.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
