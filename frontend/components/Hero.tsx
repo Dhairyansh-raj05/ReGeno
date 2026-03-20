@@ -1,8 +1,11 @@
 
 import React from 'react';
 import { ArrowRight, BadgeCheck } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative overflow-hidden rounded-2xl bg-slate-900 min-h-[400px] lg:aspect-[21/9] flex items-center group">
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -27,7 +30,10 @@ const Hero: React.FC = () => {
           <button className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg neon-glow hover:bg-primary/90 transition-all flex items-center gap-2 transform active:scale-95 group">
             Shop Now <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
-          <button className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/20 transition-all transform active:scale-95">
+          <button 
+            onClick={() => navigate('/sell')}
+            className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/20 transition-all transform active:scale-95"
+          >
             Sell Your Gear
           </button>
         </div>

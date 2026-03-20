@@ -1,6 +1,7 @@
 import { Condition, Product, NavItem } from "../types/types";
 
 export const NAV_ITEMS: NavItem[] = [
+  { label: "Home", href: "/" },
   { label: "Consoles", href: "/consoles" },
   { label: "Games", href: "/games" },
   { label: "Accessories", href: "/accessories" },

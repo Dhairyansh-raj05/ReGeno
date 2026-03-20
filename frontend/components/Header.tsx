@@ -23,7 +23,7 @@ const Header: React.FC = () => {
               <Link
                 key={item.label}
                 to={item.href}
-                className="hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200"
+                className="hover:text-[#ac3ad8] dark:hover:text-[#ac3ad8] hover:underline hover:underline-offset-4 decoration-[#ac3ad8] decoration-2 transition-all text-sm font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200"
               >
                 {item.label}
               </Link>
