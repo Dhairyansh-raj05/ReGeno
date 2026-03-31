@@ -1,62 +1,69 @@
 # ReGeno 🎮
 
-> **ReGeno India Marketplace** – The ultimate marketplace for certified retro and modern gaming hardware.
+> **ReGeno India Marketplace** — The ultimate marketplace for certified retro and modern gaming hardware.
 
 ![React](https://img.shields.io/badge/React-19-blue)
 ![Vite](https://img.shields.io/badge/Vite-6-purple)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-38B2AC)
+![Supabase](https://img.shields.io/badge/Supabase-Database%20%26%20Auth-3ECF8E)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-ea4c89)
 
-ReGeno is a modern, high-performance web application designed for gamers. Browse curated selections of legendary consoles, explore deep game libraries, and instantly get quotes to sell your battle-tested gear. It features a complete multi-step wizard for selling hardware, smooth animations, and a sleek dark-themed Glassmorphism aesthetic.
+ReGeno is a modern, high-performance web application built for Indian gamers. Browse curated selections of legendary consoles, explore deep game libraries, get instant sell quotes for your old hardware, and complete purchases with a smooth cart and checkout experience.
 
-## 🚀 Features
+## Features
 
-- **Multi-page Architecture**: Fully integrated React Router setup with specialized pages for `Home`, `Consoles`, `Games`, `Accessories`, and `Sell`.
-- **"Sell Your Gear" Wizard**: A beautifully custom 4-step wizard combining interactive hardware catalogs, dynamic search, conditions multipliers, and instantaneous quote generation.
-- **Glassmorphic Design**: Modern, premium dark theme (Stealth Black `#0D0D0D` with Electric Purple `#B000FF` accents) making the interface feel authentic, alive, and interactive.
-- **Dynamic Animations**: Fluid route transitions and step progression tracking powered flawlessly by `framer-motion`.
+- **Full Auth System** — Sign up, sign in, profile page with order history via Supabase Auth
+- **Product Catalog** — Consoles, games, and accessories with detail modals, specs, and condition badges
+- **Cart & Checkout** — Animated cart drawer, delivery form, order confirmation with email notification
+- **Sell Wizard** — 4-step flow to get an instant quote for your hardware
+- **Admin Panel** — Protected dashboard to manage inventory and sell requests
+- **AI Chatbot** — Geno, powered by Gemini, helps users find the right gear
+- **Email Notifications** — Order and sell request confirmations via Resend
 
-## 🛠 Tech Stack
+## Tech Stack
 
-- **Frontend**: [React 19](https://react.dev/) + [Vite](https://vitejs.dev/)
-- **Routing**: `react-router-dom`
-- **Styling**: Tailwind CSS
-- **Animations**: `framer-motion`
-- **Icons**: `lucide-react`
+- **Frontend**: React 19 + Vite + TypeScript
+- **Styling**: Tailwind CSS + Framer Motion
+- **Backend**: Supabase (Auth, PostgreSQL, Edge Functions)
+- **Email**: Resend
+- **AI**: Google Gemini API
+- **Icons**: Lucide React
 
-## 📦 Project Structure
+## Project Structure
 
-```text
+```
 ReGeno/
-├── frontend/             # Main application workspace
+├── frontend/
+│   ├── components/        # Shared UI (Header, Footer, ProductCard, etc.)
 │   ├── src/
-│   │   ├── components/   # Reusable UI elements (Header, Footer, ProductCards)
-│   │   ├── pages/        # Route boundaries (Home, Consoles, Games, Sell, etc.)
-│   │   └── data/         # Logic constants and the product/hardware catalog
-│   ├── App.tsx           # Application route hub
-│   └── index.css         # Global utilities & Tailwind implementation
+│   │   ├── components/    # CartDrawer, ProductModal, AdminLayout
+│   │   ├── context/       # CartContext, AuthContext
+│   │   ├── pages/         # Home, Consoles, Games, Sell, Auth, Profile, Admin
+│   │   └── services/      # Supabase client
+│   ├── types/             # TypeScript interfaces
+│   └── App.tsx
+└── supabase/
+    ├── functions/
+    │   └── send-order-email/   # Edge Function for email
+    └── schema.sql              # Database schema
 ```
 
-## 💻 Running Locally
+## Getting Started
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/Dhairyansh-raj05/ReGeno.git
-   cd ReGeno/frontend
-   ```
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+Set up your `.env`:
+```
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+VITE_GEMINI_API_KEY=
+```
 
-3. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
-
-4. **Open in browser**:
-   Navigate to `http://localhost:5173` to see the application in action.
+Run the SQL in `supabase/schema.sql` in your Supabase dashboard to create all tables.
 
 ---
 

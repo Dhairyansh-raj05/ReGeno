@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../services/firebase";
+import { supabase } from "../../services/supabase";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -14,19 +13,17 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/admin");
-    } catch (err: any) {
+    const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
+    if (authError) {
       setError("Access Denied: Invalid credentials.");
-    } finally {
-      setLoading(false);
+    } else {
+      navigate("/admin");
     }
+    setLoading(false);
   };
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center p-6 font-display relative overflow-hidden">
-      {/* Dynamic Background Glows */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#B000FF]/10 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -51,9 +48,9 @@ const LoginPage: React.FC = () => {
             <label className="text-xs font-bold text-slate-400 uppercase tracking-wider pl-1">Target Identity</label>
             <div className="relative">
               <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xl">person</span>
-              <input 
-                type="email" 
-                required 
+              <input
+                type="email"
+                required
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="admin@regeno.co"
@@ -66,9 +63,9 @@ const LoginPage: React.FC = () => {
             <label className="text-xs font-bold text-slate-400 uppercase tracking-wider pl-1">Security Key</label>
             <div className="relative">
               <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xl">lock</span>
-              <input 
-                type="password" 
-                required 
+              <input
+                type="password"
+                required
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••"
@@ -77,8 +74,8 @@ const LoginPage: React.FC = () => {
             </div>
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={loading}
             className="w-full bg-[#B000FF] hover:bg-[#8A00C2] text-white font-black uppercase tracking-wider py-4 rounded-xl transition-all border border-[#B000FF] shadow-[0_0_20px_rgba(176,0,255,0.4)] hover:shadow-[0_0_30px_rgba(176,0,255,0.6)] flex items-center justify-center gap-2 mt-4 disabled:opacity-50"
           >

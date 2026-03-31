@@ -3,6 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ChatBot from "./components/ChatBot";
+import CartDrawer from "./src/components/CartDrawer";
+import { CartProvider } from "./src/context/CartContext";
+import { AuthProvider } from "./src/context/AuthContext";
 
 // Pages
 import Home from "./src/pages/Home";
@@ -10,6 +13,8 @@ import Consoles from "./src/pages/Consoles";
 import Games from "./src/pages/Games";
 import Accessories from "./src/pages/Accessories";
 import Sell from "./src/pages/Sell";
+import AuthPage from "./src/pages/AuthPage";
+import ProfilePage from "./src/pages/ProfilePage";
 
 // Admin
 import AdminLayout from "./src/components/admin/AdminLayout";
@@ -25,34 +30,43 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     {children}
     <Footer />
     <ChatBot />
+    <CartDrawer />
   </div>
 );
 
 const App: React.FC = () => {
   return (
-    <Routes>
-      <Route path="/admin/login" element={<LoginPage />} />
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<AdminDashboard />} />
-        <Route path="inventory" element={<AdminInventory />} />
-        <Route path="requests" element={<AdminSellRequests />} />
-        <Route path="settings" element={<AdminSettings />} />
-      </Route>
-      <Route
-        path="*"
-        element={
-          <MainLayout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/consoles" element={<Consoles />} />
-              <Route path="/games" element={<Games />} />
-              <Route path="/accessories" element={<Accessories />} />
-              <Route path="/sell" element={<Sell />} />
-            </Routes>
-          </MainLayout>
-        }
-      />
-    </Routes>
+    <AuthProvider>
+      <CartProvider>
+        <Routes>
+          {/* Auth pages — no header/footer */}
+          <Route path="/auth" element={<AuthPage />} />
+
+          {/* Admin */}
+          <Route path="/admin/login" element={<LoginPage />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="inventory" element={<AdminInventory />} />
+            <Route path="requests" element={<AdminSellRequests />} />
+            <Route path="settings" element={<AdminSettings />} />
+          </Route>
+
+          {/* Main site */}
+          <Route path="*" element={
+            <MainLayout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/consoles" element={<Consoles />} />
+                <Route path="/games" element={<Games />} />
+                <Route path="/accessories" element={<Accessories />} />
+                <Route path="/sell" element={<Sell />} />
+                <Route path="/profile" element={<ProfilePage />} />
+              </Routes>
+            </MainLayout>
+          } />
+        </Routes>
+      </CartProvider>
+    </AuthProvider>
   );
 };
 

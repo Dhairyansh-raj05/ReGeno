@@ -27,7 +27,9 @@ const Hero: React.FC = () => {
           Level up sustainably. Premium Secondhand consoles and games, inspected and shipped across India.
         </p>
         <div className="flex flex-wrap gap-4 pt-4">
-          <button className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg neon-glow hover:bg-primary/90 transition-all flex items-center gap-2 transform active:scale-95 group">
+          <button
+            onClick={() => document.getElementById("consoles")?.scrollIntoView({ behavior: "smooth" })}
+            className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-lg neon-glow hover:bg-primary/90 transition-all flex items-center gap-2 transform active:scale-95 group">
             Shop Now <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
           <button 
