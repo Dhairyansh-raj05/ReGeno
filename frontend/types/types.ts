@@ -45,3 +45,17 @@ export interface ChatMessage {
   role: 'user' | 'model';
   text: string;
 }
+
+export interface Accessory {
+  id: string;
+  name: string;
+  brand: string;
+  currentPrice: number;
+  originalPrice: number;
+  imageUrl: string;
+  category: string;
+  badge?: string;
+  description: string;
+  compatibility: string;
+  features: string[];
+}
